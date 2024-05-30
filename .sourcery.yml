@@ -1,0 +1,49 @@
+configurations:
+  - sources:
+      include:
+        - Sources/
+      exclude:
+        - Sources/SparkCommonTesting/
+        - Sources/SparkCommonSnapshotTesting/
+    templates:
+      - .sourcery/template/SparkAutoMockable.stencil
+    output: Sources/SparkCommonTesting/Generated/AutoMockable.generated.swift
+    args:
+      autoMockableImports: [Combine]
+      autoMockableTestableImports: [SparkCommon]
+  - sources:
+      include:
+        - Sources/
+      exclude:
+        - Sources/SparkCommonTesting/
+        - Sources/SparkCommonSnapshotTesting/
+    templates:
+      - .sourcery/template/SparkAutoMockTest.stencil
+    output: Sources/SparkCommonTesting/Generated/AutoMockTest.generated.swift
+    args:
+      autoMockableImports: [Combine]
+      autoMockableTestableImports: [SparkCommon]
+  - sources:
+      include:
+        - Sources/
+      exclude:
+        - Sources/SparkCommonTesting/
+        - Sources/SparkCommonSnapshotTesting/
+    templates:
+      - .sourcery/template/SparkAutoPublisherTest.stencil
+    output: Sources/SparkCommonTesting/Generated/AutoPublisherTest.generated.swift
+    args:
+      autoMockableImports: [Combine]
+      autoMockableTestableImports: [SparkCommon]
+  - sources:
+      include:
+        - Sources/
+      exclude:
+        - Sources/SparkCommonTesting/
+        - Sources/SparkCommonSnapshotTesting/
+    templates:
+      - .sourcery/template/SparkAutoViewModelStub.stencil
+    output: Sources/SparkCommonTesting/Generated/AutoViewModelStub.generated.swift
+    args:
+      autoMockableImports: [Combine]
+      autoMockableTestableImports: [SparkCommon]

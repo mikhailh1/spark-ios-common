@@ -30,24 +30,24 @@ import Foundation
 
     /// A String value indicating whether **the component** set an accessibilityLabel.
     /// When the value changes, the accessibilityLabel can be updated.
-    public var CommonValue: String? {
+    var internalValue: String? {
         didSet {
-            self.value = self.CommonValue
+            self.value = self.internalValue
         }
     }
 
     /// A String value indicating the current accessibilityLabel of the component.
-    public var value: String? {
+    var value: String? {
         get {
             return self._accessibilityLabel
         }
         set {
-            // If the value is set by the consumer OR if the default value (given by the CommonValue) is nil or empty
-            if newValue != self.CommonValue || self.CommonValue.isEmptyOrNil {
+            // If the value is set by the consumer OR if the default value (given by the internalValue) is nil or empty
+            if newValue != self.internalValue || self.internalValue.isEmptyOrNil {
                 if !newValue.isEmptyOrNil, newValue != self._accessibilityLabel {
                     self._accessibilityLabel = newValue
-                } else if newValue != self.CommonValue { // Set the value with the Common value
-                    self._accessibilityLabel = self.CommonValue
+                } else if newValue != self.internalValue { // Set the value with the internal value
+                    self._accessibilityLabel = self.internalValue
                 }
                 self.isSetExternally = !newValue.isEmptyOrNil
 

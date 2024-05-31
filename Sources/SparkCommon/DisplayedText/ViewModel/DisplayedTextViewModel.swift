@@ -26,7 +26,7 @@
 // View model used by a component view model that contains a text/attributed management.
 @_spi(SI_SPI) public final class DisplayedTextViewModelDefault: DisplayedTextViewModel {
 
-    // MARK: - Common Properties
+    // MARK: - Internal Properties
 
     public private(set) var displayedTextType: DisplayedTextType
     public private(set) var displayedText: DisplayedText?
@@ -61,7 +61,7 @@
         self.getDidDisplayedTextChangeUseCase = getDidDisplayedTextChangeUseCase
     }
 
-    // MARK: - Common Methods
+    // MARK: - Internal Methods
 
     public func textChanged(_ text: String?) -> Bool {
         // Displayed text changed ?

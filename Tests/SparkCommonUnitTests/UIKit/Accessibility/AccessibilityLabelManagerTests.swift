@@ -21,14 +21,14 @@ final class AccessibilityLabelManagerTests: XCTestCase {
         XCTAssertNil(manager.value)
     }
 
-    func test_value_after_set_CommonValue() {
+    func test_value_after_set_internalValue() {
         // GIVEN
         let expectedValue = "My value"
 
         var manager = AccessibilityLabelManager()
 
         // WHEN
-        manager.CommonValue = expectedValue
+        manager.internalValue = expectedValue
 
         // THEN
         XCTAssertEqual(manager.value, expectedValue)
@@ -47,21 +47,21 @@ final class AccessibilityLabelManagerTests: XCTestCase {
         XCTAssertEqual(manager.value, expectedValue)
     }
 
-    func test_value_after_set_CommonValue_then_set_value() {
+    func test_value_after_set_internalValue_then_set_value() {
         // GIVEN
         let expectedValue = "My value"
 
         var manager = AccessibilityLabelManager()
 
         // WHEN
-        manager.CommonValue = "My other value"
+        manager.internalValue = "My other value"
         manager.value = expectedValue
 
         // THEN
         XCTAssertEqual(manager.value, expectedValue)
     }
 
-    func test_value_after_set_value_then_set_CommonValue() {
+    func test_value_after_set_value_then_set_internalValue() {
         // GIVEN
         let expectedValue = "My value"
 
@@ -69,27 +69,27 @@ final class AccessibilityLabelManagerTests: XCTestCase {
 
         // WHEN
         manager.value = expectedValue
-        manager.CommonValue = "My other value"
+        manager.internalValue = "My other value"
 
         // THEN
         XCTAssertEqual(manager.value, expectedValue)
     }
 
-    func test_value_after_set_CommonValue_then_set_nil_value() {
+    func test_value_after_set_internalValue_then_set_nil_value() {
         // GIVEN
         let expectedValue = "My value"
 
         var manager = AccessibilityLabelManager()
 
         // WHEN
-        manager.CommonValue = expectedValue
+        manager.internalValue = expectedValue
         manager.value = nil
 
         // THEN
         XCTAssertEqual(manager.value, expectedValue)
     }
 
-    func test_value_after_set_nil_value_then_set_CommonValue() {
+    func test_value_after_set_nil_value_then_set_internalValue() {
         // GIVEN
         let expectedValue = "My value"
 
@@ -97,7 +97,7 @@ final class AccessibilityLabelManagerTests: XCTestCase {
 
         // WHEN
         manager.value = nil
-        manager.CommonValue = expectedValue
+        manager.internalValue = expectedValue
 
         // THEN
         XCTAssertEqual(manager.value, expectedValue)

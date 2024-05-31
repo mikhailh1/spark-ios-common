@@ -23,16 +23,12 @@ let package = Package(
         )
     ],
     dependencies: [
-        // Git
+        // Adevinta
         .package(
-            url: "https://github.com/robergro/spm-poc-theming.git",
+            url: "https://github.com/adevinta/spark-ios-theming.git",
+            // path: "../spark-ios-theming"
             branch: "main"
         ),
-
-        // Local
-//        .package(
-//            path: "../spm-poc-theming"
-//        ),
 
         // External
         .package(
@@ -46,7 +42,7 @@ let package = Package(
             dependencies: [
                 .product(
                     name: "SparkTheming",
-                    package: "spm-poc-theming"
+                    package: "spark-ios-theming"
                 )
             ]
         ),
@@ -56,11 +52,11 @@ let package = Package(
                 "SparkCommon",
                 .product(
                     name: "SparkThemingTesting",
-                    package: "spm-poc-theming"
+                    package: "spark-ios-theming"
                 ),
                 .product(
                     name: "SparkTheme",
-                    package: "spm-poc-theming"
+                    package: "spark-ios-theming"
                 )
             ]
         ),
@@ -70,11 +66,11 @@ let package = Package(
                 "SparkCommon",
                 .product(
                     name: "SparkThemingTesting",
-                    package: "spm-poc-theming"
+                    package: "spark-ios-theming"
                 ),
                 .product(
                     name: "SparkTheme",
-                    package: "spm-poc-theming"
+                    package: "spark-ios-theming"
                 ),
                 .product(
                     name: "SnapshotTesting",

@@ -25,6 +25,12 @@ The SPM is composed by
   - **SparkCommonSnapshotTests**: Unit tests for the Common Snapshot target
   - **SparkCommonUnitTests**: Unit tests for the Common target
 
+## Guidelines
+
+There is two importants rules for this repository:
+- All ```protocols```, ```class```, ```struct```, ```var/let/func```, ..., used by at least one component (or other) in **```public```** or **```open```**.
+- Because the code inside this repository should be used only by the **spark iOS team**, all ```public``` or **```open```** code must contains the **```@_spi(SI_SPI)```** annotation.
+
 
 ## License
 

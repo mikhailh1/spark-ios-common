@@ -15,14 +15,13 @@ jobs:
     name: Build
     runs-on: macos-14
     steps:
-    - name: "Package name"
+    - name: "Check configuration"
+      if: ${{ vars.SPM_NAME }}" := ''
       run: |
-        if [ "${{ vars.SPM_NAME }}" != '' ]; then
-          echo "Build ${{ env.spm_name }} SPM at ${{ github.workspace }}"
-        else
-          echo "::error::SPM_NAME variable is NOT set on the repository settings"
-          exit 1
-        fi
+        echo "::error::SPM_NAME variable is NOT set on the repository settings"
+        exit 1
+    - name: "Package name"
+      run: echo "Build ${{ env.spm_name }} SPM at ${{ github.workspace }}"
     - name: Set Swift Version
       uses: swift-actions/setup-swift@v1
       with:
@@ -42,14 +41,13 @@ jobs:
     name: Unit and Snapshot Test
     runs-on: macos-14
     steps:
-    - name: "Package name"
+    - name: "Check configuration"
+      if: ${{ vars.SPM_NAME }}" := ''
       run: |
-        if [ "${{ vars.SPM_NAME }}" != '' ]; then
-          echo "Build ${{ env.spm_name }} SPM at ${{ github.workspace }}"
-        else
-          echo "::error file=app.js,line=1::Missing semicolon"
-          exit 1
-        fi
+        echo "::error::SPM_NAME variable is NOT set on the repository settings"
+        exit 1
+    - name: "Package name"
+      run: echo "Build ${{ env.spm_name }} SPM at ${{ github.workspace }}"
     - name: Set Swift Version
       uses: swift-actions/setup-swift@v1
       with:

@@ -9,7 +9,7 @@
 import Foundation
 import SparkTheming
 
-@_spi(SI_SPI) public protocol Updateable {
+public protocol Updateable {
     associatedtype T
     func update<Value>(_ keyPath: WritableKeyPath<T, Value>, value: Value) -> T
     func updateIfNeeded<Value: Equatable>(keyPath: ReferenceWritableKeyPath<T, Value>, newValue: Value)

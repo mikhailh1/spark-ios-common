@@ -18,6 +18,10 @@ import SwiftUI
 
     private let imageStates = ControlPropertyStates<Image>()
 
+    // MARK: - Initialization
+
+    public init() { }
+
     // MARK: - Setter
 
     /// Set the image for a state.

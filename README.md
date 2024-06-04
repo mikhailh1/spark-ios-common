@@ -29,7 +29,7 @@ The SPM is composed by
 
 There is two importants rules for this repository:
 - All ```protocols```, ```class```, ```struct```, ```var/let/func```, ..., used by at least one component (or other) in **```public```** or **```open```**.
-- Because the code inside this repository should be used only by the **spark iOS team**, all ```public``` or **```open```** code must contains the **```@_spi(SI_SPI)```** annotation.
+- If the code can be used only by the **spark iOS team**, all ```public``` or **```open```** must contains the **```@_spi(SI_SPI)```** annotation. If the code can also be used by consommer too, you don't need to add this annotation. 
 
 
 ## License

@@ -21,6 +21,10 @@ import SwiftUI
     private let attributedTextStates = ControlPropertyStates<AttributedString>()
     private let textTypesStates = ControlPropertyStates<DisplayedTextType>()
 
+    // MARK: - Initialization
+
+    public init() { }
+
     // MARK: - Setter
 
     /// Set the text for a state.

@@ -26,18 +26,22 @@ import Foundation
     /// A String value indicating the current accessibilityLabel of the component.
     private var _accessibilityLabel: String?
 
+    // MARK: - Initialization
+
+    public init() { }
+
     // MARK: - Properties
 
     /// A String value indicating whether **the component** set an accessibilityLabel.
     /// When the value changes, the accessibilityLabel can be updated.
-    var internalValue: String? {
+    public var internalValue: String? {
         didSet {
             self.value = self.internalValue
         }
     }
 
     /// A String value indicating the current accessibilityLabel of the component.
-    var value: String? {
+    public var value: String? {
         get {
             return self._accessibilityLabel
         }

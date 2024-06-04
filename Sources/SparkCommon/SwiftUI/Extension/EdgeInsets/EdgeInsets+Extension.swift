@@ -21,9 +21,9 @@ import SwiftUI
 
     /// Init EdgeInsets with vertical (use to set top and bottom insets) and horizontal value (use to set leading and trailing insets)
     /// - Parameters:
-    ///   - vertical: horizontal inset value use to set left and right insets.
-    ///   - horizontal: horizontal inset value use to set left and right insets.
-    init(vertical: CGFloat, horizontal: CGFloat) {
+    ///   - vertical: horizontal inset value use to set left and right insets. Default is zero.
+    ///   - horizontal: horizontal inset value use to set left and right insets. Default is zero.
+    init(vertical: CGFloat = .zero, horizontal: CGFloat = .zero) {
         self = .init(top: vertical, leading: horizontal, bottom: vertical, trailing: horizontal)
     }
 }

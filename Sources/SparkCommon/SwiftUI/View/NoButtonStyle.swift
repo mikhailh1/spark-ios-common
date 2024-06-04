@@ -10,6 +10,12 @@ import SwiftUI
 
 @_spi(SI_SPI) public struct NoButtonStyle: ButtonStyle {
 
+    // MARK: - Initialization
+
+    public init() { }
+
+    // MARK: - View
+
     public func makeBody(configuration: Configuration) -> some View {
         return configuration.label
     }

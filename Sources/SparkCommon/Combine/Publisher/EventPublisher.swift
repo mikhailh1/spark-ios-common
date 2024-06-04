@@ -17,11 +17,11 @@ import UIKit
 }
 
 // MARK: - Publisher
-@_spi(SI_SPI) public extension UIControl {
-    struct EventPublisher: Publisher {
+extension UIControl {
+    public struct EventPublisher: Publisher {
         // MARK: - Result
-        @_spi(SI_SPI) public typealias Output = UIControl
-        @_spi(SI_SPI) public typealias Failure = Never
+        public typealias Output = UIControl
+        public typealias Failure = Never
 
         // MARK: - Properties
         var control: UIControl

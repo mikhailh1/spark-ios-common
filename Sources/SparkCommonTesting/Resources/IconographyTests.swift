@@ -40,11 +40,9 @@ import XCTest
     // MARK: - Helper
 
     private func getImage(name: String) -> UIImage {
-        guard let image = UIImage(named: name, in: Bundle(for: ClassForBundle.self), with: nil) else {
+        guard let image = UIImage(named: name, in: .module, with: nil) else {
             fatalError("no image found for \(name)")
         }
         return image
     }
-
-    private class ClassForBundle {}
 }

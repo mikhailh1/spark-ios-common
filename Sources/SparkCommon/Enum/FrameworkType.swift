@@ -6,7 +6,7 @@
 //  Copyright © 2023 Adevinta. All rights reserved.
 //
 
-@_spi(SI_SPI) public enum FrameworkType {
+@_spi(SI_SPI) @frozen public enum FrameworkType {
     case uiKit
     case swiftUI
 }

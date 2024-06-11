@@ -7,7 +7,7 @@
 //
 
 /// Enum used for components which have a text/attributed management.
-@_spi(SI_SPI) public enum DisplayedTextType: CaseIterable {
+@_spi(SI_SPI) @frozen public enum DisplayedTextType: CaseIterable {
     /// No text/attributed text is displayed on label
     case none
     /// Text is displayed on label

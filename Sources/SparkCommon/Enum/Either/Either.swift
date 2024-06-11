@@ -8,7 +8,7 @@
 
 import Foundation
 
-@_spi(SI_SPI) public enum Either<Left, Right> {
+@_spi(SI_SPI) @frozen public enum Either<Left, Right> {
     case left(Left)
     case right(Right)
 }

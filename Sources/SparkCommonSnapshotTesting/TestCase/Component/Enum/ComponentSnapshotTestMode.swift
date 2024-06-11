@@ -8,7 +8,7 @@
 
 import UIKit
 
-@_spi(SI_SPI) public enum ComponentSnapshotTestMode: String {
+@_spi(SI_SPI) @frozen public enum ComponentSnapshotTestMode: String {
     case dark
     case light
 

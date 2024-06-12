@@ -27,7 +27,7 @@ let package = Package(
         .package(
             url: "https://github.com/adevinta/spark-ios-theming.git",
             // path: "../spark-ios-theming"
-            branch: "main"
+            /*version*/ "0.0.1"..."999.999.999"
         ),
 
         // External

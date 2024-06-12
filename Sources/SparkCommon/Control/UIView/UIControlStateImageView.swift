@@ -55,7 +55,7 @@ import UIKit
     /// Set the image for a state.
     /// - parameter image: new image
     /// - parameter state: state of the image
-    /// - parameter control: the parent control 
+    /// - parameter control: the parent control
     public func setImage(
         _ image: UIImage?,
         for state: ControlState,

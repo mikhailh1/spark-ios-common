@@ -73,5 +73,5 @@ jobs:
           sourcery
         done
     - name: Test
-      run:  |
-        xcodebuild -scheme ${{ env.spm_name }} ${{ env.xcodebuild_sdk }} ${{ env.xcodebuild_destination }} test
+      run: |
+        xcodebuild -scheme ${{ env.spm_name }} -derivedDataPath ${{ env.xcodebuild_derivedData }} ${{ env.xcodebuild_sdk }} ${{ env.xcodebuild_destination }} test

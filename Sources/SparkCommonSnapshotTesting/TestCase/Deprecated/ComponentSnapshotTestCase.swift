@@ -19,8 +19,8 @@ import UIKit
     static let namedSuffixForLight = "light"
     static let namedSuffixForDark = "dark"
 
-    static let imagePrecision: Float = 0.98
-    static let imagePerceptualPrecision: Float = 0.98
+    static let imagePrecision: Float = 0.9
+    static let imagePerceptualPrecision: Float = 0.9
 
     public static let sizes: [UIContentSizeCategory] = [.extraSmall, .medium, .accessibilityExtraExtraExtraLarge]
 

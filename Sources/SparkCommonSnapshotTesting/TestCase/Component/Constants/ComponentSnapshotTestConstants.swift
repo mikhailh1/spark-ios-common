@@ -12,8 +12,8 @@ import UIKit
     public static let record = false
     public static let timeout: TimeInterval = 5
 
-    public static let imagePrecision: Float = 0.90
-    public static let imagePerceptualPrecision: Float = 0.90
+    public static let imagePrecision: Float = 0.98
+    public static let imagePerceptualPrecision: Float = 0.98
 
     public enum Modes {
         public static let all: [ComponentSnapshotTestMode] = [.light, .dark]

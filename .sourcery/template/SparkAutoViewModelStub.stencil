@@ -8,8 +8,11 @@ import XCTest
 {% for import in argument.autoMockableImports %}
 import {{ import }}
 {% endfor %}
+{% for import in argument.autoMockableSPIImports %}
+@_spi(SI_SPI) import {{ import }}
+{% endfor %}
 {% for import in argument.autoMockableTestableImports %}
-@_spi(SI_SPI) @testable import {{ import }}
+@testable import {{ import }}
 {% endfor %}
 
 {% macro publisherName variable %}{{ variable.name }}PublisherMock{% endmacro %}
@@ -26,8 +29,8 @@ import {{ import }}
     {% for key, value in class.annotations where key|contains: "<" and key|contains: ">" %}{% if forloop.first %}// MARK: - Type Alias
 
     {% endif %}
-    typealias {% call genericTypeFromAnnotation key %} = {{ value }}
-    typealias {% call genericTypeFromAnnotation key %}GeneratedMock = {% call genericTypeFromAnnotation key %}
+    public typealias {% call genericTypeFromAnnotation key %} = {{ value }}
+    public typealias {% call genericTypeFromAnnotation key %}GeneratedMock = {% call genericTypeFromAnnotation key %}
     {% endfor %}
 
     // MARK: - Properties
@@ -36,31 +39,31 @@ import {{ import }}
 
     // MARK: - Published Properties
 
-    {% for variable in class.allVariables|!definedInExtension where variable.readAccess != "private" and variable.attributes["Published"] != nil %}
+    {% for variable in class.allVariables|!definedInExtension where variable.readAccess != "private" and variable.definedInTypeName|contains: class.name and variable.attributes["Published"] != nil %}
     public let {% call publisherName variable %}: PublisherMock<Published<{% call existentialVariableTypeName variable.typeName %}>.Publisher>
     {% endfor %}
 
     // MARK: Dependencies
 
-    {% for variable in class.allVariables|!definedInExtension where variable.name|contains: "UseCase" %}
+    {% for variable in class.allVariables|!definedInExtension where variable.definedInTypeName|contains: class.name and variable.name|contains: "UseCase" %}
     public let {% call useCaseName variable %}: {% call genericTypeName class variable %}
     {% endfor %}
 
     // MARK: - Initialization
 
     public init(
-        viewModel: {% call viewModelType class %}{% for variable in class.allVariables|!definedInExtension where variable.name|contains: "UseCase" %}{% if forloop.first %},{% endif %}
+        viewModel: {% call viewModelType class %}{% for variable in class.allVariables|!definedInExtension where variable.definedInTypeName|contains: class.name and variable.name|contains: "UseCase" %}{% if forloop.first %},{% endif %}
         {% call useCaseName variable %}: {% call genericTypeName class variable %}{% if not forloop.last %},{% endif %}{% endfor %}
     ) {
         self.viewModel = viewModel
 
         // UseCases
-        {% for variable in class.allVariables|!definedInExtension where variable.name|contains: "UseCase" %}
+        {% for variable in class.allVariables|!definedInExtension where variable.definedInTypeName|contains: class.name and variable.name|contains: "UseCase" %}
         self.{% call useCaseName variable %} = {% call useCaseName variable %}
         {% endfor %}
 
         // Publishers
-        {% for variable in class.allVariables|!definedInExtension where variable.readAccess != "private" and variable.attributes["Published"] != nil %}
+        {% for variable in class.allVariables|!definedInExtension where variable.readAccess != "private" and variable.definedInTypeName|contains: class.name and variable.attributes["Published"] != nil %}
         self.{% call publisherName variable %} = .init(publisher: viewModel.${{ variable.name }})
         {% endfor %}
     }
@@ -68,7 +71,7 @@ import {{ import }}
     // MARK: - Subscription
 
     public func subscribePublishers(on subscriptions: inout Set<AnyCancellable>) {
-        {% for variable in class.allVariables|!definedInExtension where variable.readAccess != "private" and variable.attributes["Published"] != nil %}
+        {% for variable in class.allVariables|!definedInExtension where variable.readAccess != "private" and variable.definedInTypeName|contains: class.name  and variable.attributes["Published"] != nil %}
         self.{% call publisherName variable %}.loadTesting(on: &subscriptions)
         {% endfor %}
     }
@@ -76,11 +79,11 @@ import {{ import }}
     // MARK: - Reset
 
     public func resetMockedData() {
-        {% for variable in class.allVariables|!definedInExtension where variable.name|contains: "UseCase" %}{% if forloop.first %}// Clear UseCases Mock{% endif %}
+        {% for variable in class.allVariables|!definedInExtension where variable.definedInTypeName|contains: class.name and variable.name|contains: "UseCase" %}{% if forloop.first %}// Clear UseCases Mock{% endif %}
         self.{% call useCaseName variable %}.reset()
         {% endfor %}
 
-        {% for variable in class.allVariables|!definedInExtension where variable.readAccess != "private" and variable.attributes["Published"] != nil %}{% if forloop.first %}// Reset published sink counter{% endif %}
+        {% for variable in class.allVariables|!definedInExtension where variable.readAccess != "private" and variable.definedInTypeName|contains: class.name and variable.attributes["Published"] != nil %}{% if forloop.first %}// Reset published sink counter{% endif %}
         self.{% call publisherName variable %}.reset()
         {% endfor %}
     }

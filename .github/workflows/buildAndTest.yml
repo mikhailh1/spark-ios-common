@@ -61,6 +61,16 @@ jobs:
     - name: Get sourcery
       run: |
         brew install sourcery
+    - name: Copy sourcery from common packages repository
+      run: |
+        if [[ ${{ vars.SPM_NAME }} != "SparkCommon" ]]; then
+          git clone https://github.com/adevinta/spark-ios-common
+          sed -i '' 's|../spark-ios-common|spark-ios-common|g' '.sourcery.yml'
+          cd spark-ios-common
+          rm .sourcery.yml
+        else
+          echo "No need to copy sourcery"
+        fi
     - name: Run sourcery
       run: |
         xcodebuild -list

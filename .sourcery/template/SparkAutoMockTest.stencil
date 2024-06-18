@@ -8,8 +8,11 @@ import XCTest
 {% for import in argument.autoMockableImports %}
 import {{ import }}
 {% endfor %}
+{% for import in argument.autoMockableSPIImports %}
+@_spi(SI_SPI) import {{ import }}
+{% endfor %}
 {% for import in argument.autoMockableTestableImports %}
-@_spi(SI_SPI) @testable import {{ import }}
+@testable import {{ import }}
 {% endfor %}
 
 {% macro removeGenericContentInMethodName name %}{% if method.shortName| hasSuffix:">" %}{% for element in name|split:"<" %}{% if forloop.first %}{{ element }}{% endif %}{% endfor %}{% else %}{{name}}{% endif %}{% endmacro %}

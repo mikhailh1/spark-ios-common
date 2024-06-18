@@ -7,8 +7,11 @@ import SwiftUI
 {% for import in argument.autoMockableImports %}
 import {{ import }}
 {% endfor %}
+{% for import in argument.autoMockableSPIImports %}
+@_spi(SI_SPI) import {{ import }}
+{% endfor %}
 {% for import in argument.autoMockableTestableImports %}
-@_spi(SI_SPI) @testable import {{ import }}
+@testable import {{ import }}
 
 {% macro existentialVariableTypeName typeName %}{% if typeName|contains:"any" and typeName|contains:"!" %}{{ typeName | replace:"any","(any" | replace:"!",")!" }}{% elif typeName|contains:"any" and typeName.isOptional %}{{ typeName | replace:"any","(any" | replace:"?",")?" }}{% elif typeName|contains:"any" and typeName.isClosure %}({{ typeName | replace:"any","(any" | replace:"?",")?" }}){%else%}{{ typeName }}{%endif%}{% endmacro %}
 {% macro existentialClosureVariableTypeName typeName %}{% if typeName|contains:"any" and typeName|contains:"!" %}{{ typeName | replace:"any","(any" | replace:"!",")?" }}{% elif typeName|contains:"any" and typeName.isClosure and typeName|contains:"?" %}{{ typeName | replace:"any","(any" | replace:"?",")?" }}{% elif typeName|contains:"any" and typeName|contains:"?" %}{{ typeName | replace:"any","(any" | replace:"?",")?" }}{%else%}{{ typeName }}{%endif%}{% endmacro %}
@@ -185,7 +188,7 @@ import {{ import }}
     // MARK: - Type Alias
 
          {% endif%}
-    typealias {{ key }} = {{ key }}Mock
+    public typealias {{ key }} = {{ key }}Mock
     {% else %}
     #error ("The protocol with associatedtype should work only with Equatable.")
     {% endif%}
@@ -197,7 +200,7 @@ import {{ import }}
     // MARK: - Associated Type
 
         {% endif%}
-    struct {{ key }}Mock: {{ value.typeName }} {
+    public struct {{ key }}Mock: {{ value.typeName }} {
         let id = UUID().uuidString
     }
     {% endif%}

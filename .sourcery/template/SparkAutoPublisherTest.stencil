@@ -8,8 +8,11 @@ import XCTest
 {% for import in argument.autoMockableImports %}
 import {{ import }}
 {% endfor %}
+{% for import in argument.autoMockableSPIImports %}
+@_spi(SI_SPI) import {{ import }}
+{% endfor %}
 {% for import in argument.autoMockableTestableImports %}
-@_spi(SI_SPI) @testable import {{ import }}
+@testable import {{ import }}
 {% endfor %}
 
 {% macro expectedSinkCount variable %}expected{{ variable.name | upperFirstLetter }}SinkCount{% endmacro %}
@@ -21,7 +24,7 @@ import {{ import }}
     {% for key, value in class.annotations where key|contains: "<" and key|contains: ">" %}{% if forloop.first %}// MARK: - Type Alias
 
     {% endif %}
-    typealias {{ key|replace:"<", ""|replace:">", "" }} = {{ value }}
+    public typealias {{ key|replace:"<", ""|replace:">", "" }} = {{ value }}
     {% endfor %}
 
     // MARK: - Initialization
@@ -31,7 +34,7 @@ import {{ import }}
 
     // MARK: - Tests
 
-    {% for variable in class.allVariables|!definedInExtension where variable.readAccess != "private" and variable.attributes["Published"] != nil %}
+    {% for variable in class.allVariables|!definedInExtension where variable.readAccess != "private" and variable.definedInTypeName|contains: class.name and variable.attributes["Published"] != nil %}
         
     public static func XCTSinksCount(
         {{ variable.name }} mock: PublisherMock<Published<{% call existentialVariableTypeName variable.typeName %}>.Publisher>,

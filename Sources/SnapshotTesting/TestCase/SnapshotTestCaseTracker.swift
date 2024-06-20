@@ -30,19 +30,15 @@ import XCTest
     // MARK: - Methods
 
     /// Create the snapshot directory for a file
-    /// The final link should be like: *"XYZ/ModuleName/Tests/ModuleNameSnapshotTests/.__snapshots__/"*
+    /// The final link should be like: *"your-module-name/Tests/SnapshotTests/.__snapshots__/"*
     public func snapshotDirectory(for file: StaticString) -> String {
-        guard let identifier = Bundle(for: type(of: self)).bundleIdentifier else {
-            fatalError("No identifier found on the SPM")
-        }
-
         var filePaths = "\(file)".components(separatedBy: Constants.separator)
 
-        guard let bundlePathIndex = filePaths.firstIndex(of: identifier) else {
+        guard let bundlePathIndex = filePaths.firstIndex(of: "SnapshotTests") else {
             fatalError("No bundle identifier found on the file path")
         }
 
-        // Remove all folder under the ModuleNameSnapshotTests folder.
+        // Remove all folder under the SnapshotTests folder.
         filePaths.removeLast(filePaths.count - bundlePathIndex - 1)
         // Add the snapshot folder
         filePaths.append(Constants.snapshotFolder)

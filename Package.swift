@@ -45,7 +45,8 @@ let package = Package(
                     name: "SparkTheming",
                     package: "spark-ios-theming"
                 )
-            ]
+            ],
+            path: "Sources/Core"
         ),
         .target(
             name: "SparkCommonTesting",
@@ -59,7 +60,8 @@ let package = Package(
                     name: "SparkTheme",
                     package: "spark-ios-theming"
                 )
-            ]
+            ],
+            path: "Sources/Testing"
         ),
         .target(
             name: "SparkCommonSnapshotTesting",
@@ -77,14 +79,16 @@ let package = Package(
                     name: "SnapshotTesting",
                     package: "swift-snapshot-testing"
                 ),
-            ]
+            ],
+            path: "Sources/SnapshotTesting"
         ),
         .testTarget(
             name: "SparkCommonUnitTests",
             dependencies: [
                 "SparkCommon",
                 "SparkCommonTesting"
-            ]
+            ],
+            path: "Tests/UnitTests"
         ),
         .testTarget(
             name: "SparkCommonSnapshotTests",
@@ -92,7 +96,8 @@ let package = Package(
                 "SparkCommon",
                 "SparkCommonSnapshotTesting",
                 "SparkCommonTesting"
-            ]
+            ],
+            path: "Tests/SnapshotTests"
         )
     ]
 )

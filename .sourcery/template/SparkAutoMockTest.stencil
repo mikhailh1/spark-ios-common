@@ -1,20 +1,3 @@
-// swiftlint:disable all
-
-import Foundation
-import UIKit
-import SwiftUI
-import XCTest
-
-{% for import in argument.autoMockableImports %}
-import {{ import }}
-{% endfor %}
-{% for import in argument.autoMockableSPIImports %}
-@_spi(SI_SPI) import {{ import }}
-{% endfor %}
-{% for import in argument.autoMockableTestableImports %}
-@testable import {{ import }}
-{% endfor %}
-
 {% macro removeGenericContentInMethodName name %}{% if method.shortName| hasSuffix:">" %}{% for element in name|split:"<" %}{% if forloop.first %}{{ element }}{% endif %}{% endfor %}{% else %}{{name}}{% endif %}{% endmacro %}
 {% macro swiftifyMethodNameV2 method %}{% if method.parameters.count > 0 %}{% call removeGenericContentInMethodName method.shortName %}With{% for param in method.parameters %}{{ param.name | snakeToCamelCase }}{% if not forloop.last %}And{% endif %}{% endfor %}{% else %}{{method.shortName}}{% endif %}{% endmacro %}
 {% macro mockName protocol %}{{ protocol.name }}GeneratedMock{% endmacro %}

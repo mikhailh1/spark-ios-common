@@ -1,0 +1,12 @@
+// swiftlint:disable all
+
+import Foundation
+import UIKit
+import SwiftUI
+
+{% for import in argument.autoMockableImports %}
+import {{ import }}
+{% endfor %}
+{% for import in argument.autoMockableSPIImports %}
+@_spi(SI_SPI) import {{ import }}
+{% endfor %}

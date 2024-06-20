@@ -1,20 +1,3 @@
-// swiftlint:disable all
- 
-import Combine
-import UIKit
-import SwiftUI
-import XCTest
-
-{% for import in argument.autoMockableImports %}
-import {{ import }}
-{% endfor %}
-{% for import in argument.autoMockableSPIImports %}
-@_spi(SI_SPI) import {{ import }}
-{% endfor %}
-{% for import in argument.autoMockableTestableImports %}
-@testable import {{ import }}
-{% endfor %}
-
 {% macro publisherName variable %}{{ variable.name }}PublisherMock{% endmacro %}
 {% macro viewModelType class %}{{ class.name }}{% for key in class.annotations where key|contains: "<" and key|contains: ">" %}{% if forloop.first %}<{% endif %}{{ key|replace:"<", "" | replace:">", "" | upperFirstLetter }}{% if forloop.last %}>{% else %},{% endif %}{% endfor %}{% endmacro %}
 {% macro useCaseName variable %}{{ variable.name }}Mock{% endmacro %}

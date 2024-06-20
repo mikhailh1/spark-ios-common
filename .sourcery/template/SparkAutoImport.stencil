@@ -3,6 +3,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import XCTest
 
 {% for import in argument.autoMockableImports %}
 import {{ import }}

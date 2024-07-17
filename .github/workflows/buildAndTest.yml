@@ -65,7 +65,7 @@ jobs:
       run: |
         if [[ ${{ vars.SPM_NAME }} != "SparkCommon" ]]; then
           git clone https://github.com/adevinta/spark-ios-common
-          sed -i '' 's|../spark-ios-common|spark-ios-common|g' '.sourcery.yml'
+          sed -i '' 's|.sourcery|spark-ios-common/.sourcery|g' '.sourcery.yml'
           cd spark-ios-common
           rm .sourcery.yml
         else
